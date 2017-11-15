@@ -14,6 +14,14 @@ class Post(models.Model):
     )
     tags = models.ManyToManyField('Tag')
 
+    def add_comment(self, user, content):
+        return self.comment_set.create(author=user, content=content)
+
+    def add_tag(self, tag_name):
+        tag, tag_created = Tag.objects.get_or_created(name=tag_name)
+        if not self.tags.filter(id=tag.id).exists():
+            self.tags.add(tag)
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post)
