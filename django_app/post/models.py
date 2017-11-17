@@ -10,7 +10,8 @@ class Post(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
     like_users = models.ManyToManyField(
         User,
-        related_name='like_posts'
+        related_name='like_posts',
+        through='PostLike',
     )
     tags = models.ManyToManyField('Tag')
 
@@ -23,12 +24,28 @@ class Post(models.Model):
             self.tags.add(tag)
 
 
+class PostLike(models.Model):
+    post = models.ForeignKey(Post)
+    user = models.ForeignKey(User)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+
 class Comment(models.Model):
     post = models.ForeignKey(Post)
     author = models.ForeignKey(User)
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
+    like_users = models.ManyToManyField(
+        User,
+        related_name='like_comments',
+        through='CommentLike',
+    )
+
+class CommentLike(models.Model):
+    comment = models.ForeignKey(Comment)
+    user = models.ForeignKey(User)
+    created_date = models.DateTimeField(auto_now_add=True)
 
 
 class Tag(models.Model):
