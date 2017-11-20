@@ -23,6 +23,11 @@ class Post(models.Model):
         if not self.tags.filter(id=tag.id).exists():
             self.tags.add(tag)
 
+    @property
+    def like_count(self):
+        # 자신을 like 하고있는 user 수 리턴
+        return self.like_users.count()
+    
 
 class PostLike(models.Model):
     post = models.ForeignKey(Post)
@@ -41,6 +46,7 @@ class Comment(models.Model):
         related_name='like_comments',
         through='CommentLike',
     )
+
 
 class CommentLike(models.Model):
     comment = models.ForeignKey(Comment)
