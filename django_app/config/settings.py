@@ -28,6 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Custom User
+AUTH_USER_MODEL = 'member.User'
+
+
 # Application definition
 
 INSTALLED_APPS = [

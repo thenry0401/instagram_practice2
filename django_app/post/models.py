@@ -1,15 +1,16 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 
 
 class Post(models.Model):
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
     photo = models.ImageField(blank=True)
     my_comment = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     like_users = models.ManyToManyField(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name='like_posts',
         through='PostLike',
     )
@@ -27,22 +28,22 @@ class Post(models.Model):
     def like_count(self):
         # 자신을 like 하고있는 user 수 리턴
         return self.like_users.count()
-    
+
 
 class PostLike(models.Model):
     post = models.ForeignKey(Post)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created_date = models.DateTimeField(auto_now_add=True)
 
 
 class Comment(models.Model):
     post = models.ForeignKey(Post)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     like_users = models.ManyToManyField(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name='like_comments',
         through='CommentLike',
     )
@@ -50,7 +51,7 @@ class Comment(models.Model):
 
 class CommentLike(models.Model):
     comment = models.ForeignKey(Comment)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created_date = models.DateTimeField(auto_now_add=True)
 
 
