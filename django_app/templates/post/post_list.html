@@ -9,7 +9,12 @@
 </head>
 <body>
 {% for post in posts %}
-    {{ post }}
+    <p>
+        {{ post.id }}
+    </p>
+    <p>
+        <img src="{{ post.photo.url }}" alt="" width="100">
+    </p>
 {% endfor %}
 </body>
 </html>
