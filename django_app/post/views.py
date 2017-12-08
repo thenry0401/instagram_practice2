@@ -9,8 +9,8 @@ def index(request):
 
 
 def post_list(request):
-    post = Post.objects.all()
+    posts = Post.objects.all()
     context = {
-        'post': post,
+        'posts': posts,
     }
     return render(request, 'post/post_list.html', context)

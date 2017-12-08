@@ -8,6 +8,8 @@
     <title>Post list</title>
 </head>
 <body>
-    {% post %}
+{% for post in posts %}
+    {{ post }}
+{% endfor %}
 </body>
 </html>
