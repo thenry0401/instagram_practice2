@@ -14,7 +14,7 @@ class Post(models.Model):
         related_name='like_posts',
         through='PostLike',
     )
-    tags = models.ManyToManyField('Tag')
+    tags = models.ManyToManyField('Tag', blank=True)
 
     def add_comment(self, user, content):
         return self.comment_set.create(author=user, content=content)
