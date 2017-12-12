@@ -16,18 +16,21 @@ def post_list(request):
     return render(request, 'post/post_list.html', context)
 
 
-def post_detail(request):
-    pass
-
+def post_detail(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    context = {
+        'post': post
+    }
+    return render(request, 'post/post_detail.html', context)
 
 def post_create(request):
     pass
 
 
-def post_modify(request):
+def post_modify(request, post_pk):
     pass
 
 
-def post_delete(request):
+def post_delete(request, post_pk):
     pass
 
