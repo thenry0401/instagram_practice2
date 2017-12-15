@@ -8,8 +8,12 @@
     <title>Post detail</title>
 </head>
 <body>
-    <p>{{ post.id }}</p>
-    <p>{{ post.my_comment }}</p>
     <img src="{{ post.photo.url }}" alt="" width="300">
+
+    <!--<img src="" alt=""> 유저 프로필 이미지-->
+    <span>{{ post.author }}</span>
+    <span>팔로우</span>
+
+    <p>{{ post.my_comment }}</p>
 </body>
 </html>

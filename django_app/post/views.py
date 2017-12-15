@@ -19,8 +19,10 @@ def post_list(request):
 def post_detail(request, post_pk):
     try:
         post = Post.objects.get(pk=post_pk)
+        author = Post.author
         context = {
-            'post': post
+            'post': post,
+            'author': author,
         }
         return render(request, 'post/post_detail.html', context)
     except Post.DoesNotExist as e:
